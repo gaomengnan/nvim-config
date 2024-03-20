@@ -9,11 +9,36 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    { "LazyVim/LazyVim", import = "lazyvim.plugins", opts = {
+      -- colorscheme = "solarized-osaka",
+      colorscheme = "deepwhite",
+      -- colorscheme = "tender",
+      -- colorscheme = "kanagawa-dragon",
+      -- colorscheme = "oxocarbon",
+      -- colorscheme = "ayu",
+      -- colorscheme = "sonokai",
+      -- colorscheme = "jellybeans",
+      -- colorscheme = "doom-gruvbox-light",
+      -- colorscheme = "nightfly",
+      -- colorscheme = "spacecamp_lite",
+      -- colorscheme = "focuspoint",
+      -- colorscheme = "OceanicNext",
+      -- colorscheme = "challenger_deep",
+      -- colorscheme = "solarized8_flat",
+      -- colorscheme = "jellybeans",
+      -- colorscheme = "onehalflight",
+      -- colorscheme = "twilight256",
+      -- colorscheme = "slate",
+      -- colorscheme = "lunaperche",
+      -- colorscheme = "catppuccin",
+      -- colorscheme = "doom-dracula",
+      -- colorscheme = "abscs",
+    } },
     -- import any extras modules here
     -- { import = "lazyvim.plugins.extras.lang.typescript" },
     -- { import = "lazyvim.plugins.extras.lang.json" },
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    { import = "lazyvim.plugins.extras.vscode" },
     -- import/override with your plugins
     { import = "plugins" },
   },
