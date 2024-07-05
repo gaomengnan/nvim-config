@@ -1,116 +1,33 @@
 local Util = require("lazyvim.util")
 return {
   {
-    "nvim-neotest/nvim-nio",
-  },
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   dependencies = {
-  --     {
-  --       "Saecki/crates.nvim",
-  --       event = { "BufRead Cargo.toml" },
-  --       opts = {
-  --         src = {
-  --           cmp = { enabled = true },
-  --         },
-  --       },
-  --     },
-  --   },
-  --   ---@param opts cmp.ConfigSchema
-  --   opts = function(_, opts)
-  --     local cmp = require("cmp")
-  --     opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-  --       { name = "crates" },
-  --     }))
-  --   end,
-  -- },
-
-  {
-    "hrsh7th/nvim-cmp",
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp",
     dependencies = {
-      { "hrsh7th/cmp-emoji" },
-      -- {"onsails/lspkind.nvim"},
-      -- {
-      --   "tzachar/cmp-tabnine",
-      --   build = "./dl_binaries.sh",
-      --   dependencies = "hrsh7th/nvim-cmp",
-      --   opts = {
-      --     max_lines = 1000,
-      --     max_num_results = 2,
-      --     sort = true,
-      --   },
-      --   config = function(_, opts)
-      --     require("cmp_tabnine.config"):setup(opts)
-      --   end,
-      -- },
+      {
+        "rafamadriz/friendly-snippets",
+        config = function() end,
+      },
     },
-
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      -- table.insert(opts.sources, 1, {
-      --   name = "cody",
-      --   priority = 200,
-      -- })
-      table.insert(opts.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
-
-      table.insert(opts.sources, 1, {
-        name = "codeium",
-        group_index = 1,
-        priority = 100,
-      })
-
-      -- table.insert(opts.sources, 2, {
-      --   name = "cmp_tabnine",
-      --   group_index = 1,
-      --   -- priority = 100,
-      -- })
-
-      opts.formatting.format = Util.inject.args(opts.formatting.format, function(entry, item)
-        -- require("lspkind").cmp_format({
-        --   mode = "symbol",
-        --   maxwidth = 50,
-        --   ellipsis_char = "...",
-        --   symbol_map = { Codeium = "" },
-        -- })
-        -- Hide percentage in the menu
-        -- if entry.source.name == "cmp_tabnine" then
-        --   item.menu = ""
-        -- end
-      end)
-      local has_words_before = function()
-        unpack = unpack or table.unpack
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
-
-      local luasnip = require("luasnip")
-      local cmp = require("cmp")
-
-      opts.mapping = vim.tbl_extend("force", opts.mapping, {
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-            -- this way you will only jump inside the snippet region
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
+  },
+  {
+    "CRAG666/code_runner.nvim",
+    config = function()
+      require("code_runner").setup({
+        term = {
+          size = 10,
+        },
+        filetype = {
+          python = "python -u main.py",
+        },
       })
     end,
+  },
+  {
+    "nvim-neotest/nvim-nio",
   },
   {
     "mfussenegger/nvim-dap",
@@ -147,10 +64,10 @@ return {
       },
 
       -- virtual text for the debugger
-      {
-        "theHamsta/nvim-dap-virtual-text",
-        opts = {},
-      },
+      -- {
+      --   "theHamsta/nvim-dap-virtual-text",
+      --   opts = {},
+      -- },
 
       -- which key integration
       {
@@ -267,7 +184,7 @@ return {
   },
   {
     "theHamsta/nvim-dap-virtual-text",
-
+    enabled = false,
     opts = {},
   },
   {
@@ -332,6 +249,7 @@ return {
         "python",
         "c",
         "cpp",
+        "python",
         -- "hpp",
         -- "dart",
         -- "dart"
@@ -344,6 +262,31 @@ return {
 
     opts = {
       servers = {
+        html = {
+          filetypes = { "html", "templ", "heex"},
+        },
+        elixirls = {
+          single_file_support = true,
+        },
+        lua_ls = {
+          single_file_support = true,
+        },
+        yamlls = {
+          flags = {
+            debounce_text_changes = 150,
+          },
+          settings = {
+            yaml = {
+              format = {
+                enable = true,
+                singleQuote = false,
+                bracketSpacing = true,
+              },
+              validate = true,
+              completion = true,
+            },
+          },
+        },
         -- Ensure mason installs the server
         -- dartls = {
         --   setup = {
@@ -460,12 +403,12 @@ return {
                 vendor = true,
               },
               hints = {
-                assignVariableTypes = true,
+                assignVariableTypes = false,
                 compositeLiteralFields = true,
                 compositeLiteralTypes = true,
                 constantValues = true,
                 functionTypeParameters = true,
-                parameterNames = true,
+                parameterNames = false,
                 rangeVariableTypes = true,
               },
               analyses = {
@@ -521,6 +464,12 @@ return {
           return true
         end,
         gopls = function(_, opts)
+          vim.keymap.set(
+            "n",
+            "<leader>kk",
+            "<cmd>lua require('gaomengnan.discipline').StartImplMethod()<CR>",
+            { noremap = true }
+          )
           -- workaround for gopls not supporting semanticTokensProvider
           -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
           require("lazyvim.util").lsp.on_attach(function(client, _)
@@ -551,15 +500,78 @@ return {
     config = function()
       require("dap-go").setup({
         dap_configurations = {
-          {
-            type = "go",
-            name = "8816",
-            request = "launch",
-            program = "${file}",
-            cwd = "${relativeFileDirname}",
-            args = { "server", "-c=./tracker/config/settings.tracker8816.yml" },
-          },
+          -- {
+          --   name = "Edisc-Api",
+          --   type = "go",
+          --   request = "launch",
+          --   showLog = true,
+          --   mode = "test",
+          --   dlvToolPath = vim.fn.exepath("dlv"),
+          --   program = "${file}",
+          --   -- delve = {
+          --   --   -- path to build_flagsdelve binary
+          --   --   build_flags = "--check-go-version=false",
+          --   --   args = { "--check-go-version=", "false" },
+          --   -- },
+          --   -- mode = "launch",
+          --   -- remotePath = "/go/src/app/tracker",
+          --   -- port = 40000,
+          --   -- host = "127.0.0.1",
+          --   cwd = "${workspaceFolder}",
+          --   args = { "--check-go-version=false" },
+          --   -- trace = "verbose",
+          -- },
         },
+      })
+      local dap = require("dap")
+      -- table.insert(dap.configurations.go, {
+      --   type = "delve1",
+      --   name = "Docker 1.0",
+      --   mode = "remote",
+      --   request = "attach",
+      --   substitutePath = {
+      --     { from = "${workspaceFolder}", to = "/go/src/app" },
+      --   },
+      -- })
+
+      -- table.insert(dap.configurations.go, {
+      --   type = "delve2",
+      --   name = "Docker 2.0",
+      --   mode = "remote",
+      --   request = "attach",
+      --   substitutePath = {
+      --     { from = "${workspaceFolder}", to = "/go/src/app" },
+      --   },
+      -- })
+      -- dap.adapters.delve1 = {
+      --   type = "server",
+      --   host = "localhost",
+      --   port = "40000",
+      -- }
+      -- dap.adapters.delve2 = {
+      --   type = "server",
+      --   host = "localhost",
+      --   port = "40001",
+      -- }
+
+      table.insert(dap.configurations.go, {
+        type = "go",
+        name = "D218",
+        request = "launch",
+        -- mode = "test",
+        program = "${file}",
+        cwd = "${workspaceFolder}/tracker",
+        args = { "server", "-c=./config/settings.tracker8816.yml" },
+      })
+
+      table.insert(dap.configurations.go, {
+        type = "go",
+        name = "D217",
+        request = "launch",
+        -- mode = "test",
+        program = "${file}",
+        cwd = "${workspaceFolder}/tracker",
+        args = { "server", "-c=./config/settings.trackerv2.yml" },
       })
     end,
   },

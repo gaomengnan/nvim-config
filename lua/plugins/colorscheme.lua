@@ -1,5 +1,37 @@
 return {
   {
+    "olivercederborg/poimandres.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("poimandres").setup({
+        -- leave this setup function empty for default config
+        -- or refer to the configuration section
+        -- for configuration options
+      })
+    end,
+
+    -- optionally set the colorscheme within lazy config
+    init = function()
+      vim.cmd("colorscheme poimandres")
+    end,
+  },
+  {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+  },
+  { "techtuner/aura-neovim" },
+  { "fenetikm/falcon" },
+  { "sheerun/vim-polyglot" },
+  { "Rigellute/rigel" },
+  { "NLKNguyen/papercolor-theme" },
+  { "savq/melange-nvim", lazy = false },
+  { "cormacrelf/vim-colors-github" },
+  {
+    "bruth/vim-newsprint-theme",
+  },
+  {
     "yorickpeterse/vim-paper",
   },
   {
@@ -32,14 +64,13 @@ return {
       }
     end,
   },
-  { "Abstract-IDE/Abstract-cs" },
   { "rebelot/kanagawa.nvim" },
   {
     "catppuccin/nvim",
     name = "catppuccin",
     opts = {
       term_colors = true,
-      transparent_background = false,
+      transparent_background = true,
       styles = {
         comments = {},
         conditionals = {},

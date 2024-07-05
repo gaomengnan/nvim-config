@@ -1,12 +1,12 @@
 return {
-  enabled = true,
+  enabled = false,
   "neoclide/coc.nvim",
   -- build = "npm ci",
   branch = "release",
   config = function()
     vim.g.coc_node_path = os.getenv("COC_NODE")
     vim.g.coc_npm_cmd = os.getenv("COC_NPM")
-    vim.g.coc_global_extensions = { "coc-vetur", "coc-json", "coc-tsserver" }
+    vim.g.coc_global_extensions = { "coc-vetur", "coc-json", "coc-tsserver"}
     local keyset = vim.keymap.set
     local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
     -- keyset("x", "if", "<Plug>(coc-funcobj-i)", opts)
@@ -22,22 +22,25 @@ return {
       local col = vim.fn.col(".") - 1
       return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
     end
-    keyset(
-      "i",
-      "<c-n>",
-      'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
-      opts
-    )
+    -- keyset(
+    --   "i",
+    --   "<c-n>",
+    --   'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<c-n>" : coc#refresh()',
+    --   opts
+    -- )
+    keyset("i", "<c-n>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<c-n>" : coc#refresh()', opts)
+
     keyset("i", "<c-p>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
     --
     --Make <CR> to accept selected completion item or notify coc.nvim to format
     --<C-g>u breaks current undo, please make your own choice
-    keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
+    keyset("i", "<c-m>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
     --
     --Use <c-j> to trigger snippets
     keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
     --Use <c-space> to trigger completion
     keyset("i", "<c-space>", "coc#refresh()", { silent = true, expr = true })
+    -- keyset("i", "<CR>", "coc#pum#confirm()", { silent = true, expr = true })
     --
     --Use `[g` and `]g` to navigate diagnostics
     --Use `:CocDiagnostics` to get all diagnostics of current buffer in location list

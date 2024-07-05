@@ -1,8 +1,38 @@
 return {
+  -- {
+  --   "triglav/vim-visual-increment",
+  -- },
+  -- {
+  --   "gelguy/wilder.nvim",
+  --   config = function()
+  --     -- config goes here
+  --     require("wilder").setup({
+  --       modes = {
+  --         "/",
+  --         "?",
+  --         ":",
+  --         "=",
+  --       },
+  --     })
+  --   end,
+  -- },
+  { "michaeljsmith/vim-indent-object" },
+  {
+    "LunarVim/bigfile.nvim",
+    event = "BufReadPre",
+    opts = {
+      filesize = 2,
+    },
+    config = function(_, opts)
+      require("bigfile").setup(opts)
+    end,
+  },
+  { "wsdjeg/gfr.vim" },
   {
     "telescope.nvim",
     dependencies = {
       "nvim-telescope/telescope-file-browser.nvim",
+      "xiyaowong/telescope-emoji.nvim",
     },
     keys = {
       {
@@ -105,6 +135,7 @@ return {
       local telescope = require("telescope")
       local actions = require("telescope.actions")
       local fb_actions = require("telescope").extensions.file_browser.actions
+      telescope.load_extension("emoji")
 
       opts.defaults = vim.tbl_deep_extend("force", opts.defaults, {
         wrap_results = true,

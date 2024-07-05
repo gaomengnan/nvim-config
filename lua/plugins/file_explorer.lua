@@ -9,9 +9,39 @@ return {
   --     table.insert(opts.open_files_do_not_replace_types, "edgy")
   --   end,
   -- },
+
+  -- {
+  --   "simonmclean/triptych.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim", -- required
+  --     "nvim-tree/nvim-web-devicons", -- optional
+  --   },
+  --
+  --   config = function()
+  --     require("triptych").setup()
+  --     vim.keymap.set("n", "<leader>e", "<cmd>Triptych<cr>", { desc = "file explorer open" })
+  --   end,
+  -- },
   -- {
   --   "ms-jpq/chadtree",
   --   branch = "chad",
-  --   build = "python3 -m chadtree deps"
-  -- }
+  --   build = "python3 -m chadtree deps",
+  --   config = function()
+  --     vim.keymap.set("n", "<leader>e", "<cmd>CHADopen<cr>", { desc = "chad file explorer open" })
+  --   end,
+  -- },
+
+  -- {
+  --   "kelly-lin/ranger.nvim",
+  --   config = function()
+  --     require("ranger-nvim").setup({})
+  --     vim.api.nvim_set_keymap("n", "<leader>e", "", {
+  --       noremap = true,
+  --       callback = function()
+  --         require("ranger-nvim").open(true)
+  --       end,
+  --     })
+  --   end,
+  -- },
 }

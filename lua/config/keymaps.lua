@@ -1,7 +1,6 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
--- local discipline = require("gaomengnan.discipline")
 -- discipline.cowboy()
 local Util = require("lazyvim.util")
 
@@ -38,6 +37,7 @@ map("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 map("n", "md", "<cmd>Lspsaga peek_definition<CR>", { desc = "Lspsaga peek_definition" })
+map("n", "ma", "<cmd>:Lspsaga code_action<cr>", { desc = "Lspsaga code_action" })
 map("n", "mf", "<cmd>Lspsaga finder tyd+ref+imp+def<CR>", { desc = "Lspsaga finder" })
 
 map("n", ";n", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Lspsaga finder" })
@@ -50,7 +50,7 @@ map("n", "<C-w>m", "<cmd>MaximizerToggle<CR>", { desc = "Toggle max screen" })
 
 map("n", "ger", "<CMD>GoIfErr<CR>", { desc = "GoIfErr" })
 map("n", "c'", "ci'", { desc = "" })
-map("n", "c\"", "ci\"", { desc = "" })
+map("n", 'c"', 'ci"', { desc = "" })
 map("n", "c)", "ci)", { desc = "" })
 map("n", "c}", "ci}", { desc = "" })
 map("n", "c]", "ci]", { desc = "" })
@@ -58,15 +58,15 @@ map("n", "c`", "ci`", { desc = "" })
 map("n", "c>", "ci>", { desc = "" })
 map("n", "<leader>ue", "<cmd>UndotreeToggle<cr>", { desc = "Toggle undotree history" })
 map("n", "<leader>yf", "<cmd>YankyRingHistory<cr>", { desc = "Toggle paste history" })
-map("n", "<C-a>", "ggvG", {desc="All Select"})
+-- map("n", "<C-a>", "ggvG", { desc = "All Select" })
 -- map("n", "<leader>fm", "<cmd>CocCommand flutter.emulators<cr>", {desc=" Open ios simulator"})
 -- map("n", "<leader>fs", "<cmd>CocCommand flutter.run<cr>", {desc="Run flutter project"})
 -- map("n", "<leader>fd", "<cmd>CocCommand flutter.dev.quit<cr>", {desc="Stop flutter project"})
 -- map("n", "<leader>fv", "<cmd>CocCommand flutter.devices<cr>", {desc="Run devices"})
-map("n", "<leader>fm", "<cmd>FlutterEmulators<cr>", {desc=" Open ios simulator"})
-map("n", "<leader>fs", "<cmd>FlutterRun<cr>", {desc="Run flutter project"})
-map("n", "<leader>fd", "<cmd>FlutterQuit<cr>", {desc="Stop flutter project"})
-map("n", "<leader>fp", "<cmd>FlutterRestart<cr>", {desc="Stop flutter project"})
+map("n", "<leader>fm", "<cmd>FlutterEmulators<cr>", { desc = " Open ios simulator" })
+map("n", "<leader>fs", "<cmd>FlutterRun<cr>", { desc = "Run flutter project" })
+map("n", "<leader>fd", "<cmd>FlutterQuit<cr>", { desc = "Stop flutter project" })
+map("n", "<leader>fp", "<cmd>FlutterRestart<cr>", { desc = "Stop flutter project" })
 -- yanky keymap configuration
 -- vim.keymap.set({"n","x"}, "p", "<Plug>(YankyPutAfter)")
 -- vim.keymap.set({"n","x"}, "P", "<Plug>(YankyPutBefore)")
@@ -77,21 +77,73 @@ map("n", "<leader>fp", "<cmd>FlutterRestart<cr>", {desc="Stop flutter project"})
 
 if vim.g.vscode then
   -- nnoremap <C-w>gd <Cmd>lua require('vscode-neovim').action('editor.action.revealDefinitionAside')<CR>
-  map("n", "gd", "<Cmd>lua require('vscode-neovim').action('editor.action.revealDefinition')<CR>", {desc='GotoDefinition'})
-  map("n", "gD", "<Cmd>lua require('vscode-neovim').action('editor.action.peekDefinition')<CR>", {desc='GotoDefinition'})
-  map("n", "gy", "<Cmd>lua require('vscode-neovim').action('editor.action.revealDeclaration')<CR>", {desc='GotoDefinition'})
-  map("n", "gI", "<Cmd>lua require('vscode-neovim').action('editor.action.peekDeclaration')<CR>", {desc='GotoDefinition'})
+  map(
+    "n",
+    "gd",
+    "<Cmd>lua require('vscode-neovim').action('editor.action.revealDefinition')<CR>",
+    { desc = "GotoDefinition" }
+  )
+  map(
+    "n",
+    "gD",
+    "<Cmd>lua require('vscode-neovim').action('editor.action.peekDefinition')<CR>",
+    { desc = "GotoDefinition" }
+  )
+  map(
+    "n",
+    "gy",
+    "<Cmd>lua require('vscode-neovim').action('editor.action.revealDeclaration')<CR>",
+    { desc = "GotoDefinition" }
+  )
+  map(
+    "n",
+    "gI",
+    "<Cmd>lua require('vscode-neovim').action('editor.action.goToImplementation')<CR>",
+    { desc = "GotoDefinition" }
+  )
 end
 
--- local discipline = require("gaomengnan.discipline")
--- discipline.cowboy()
-map("n", "<leader>dT", "<cmd>lua require('gaomengnan.debug').debug()<cr>", {desc="Debug"})
-map("n", "<leader>cc", "<cmd>:Lspsaga code_action<cr>", {desc="Lspsaga code_action"})
-map("n", "<leader>gS", "<cmd>DiffviewOpen<cr>", {desc="diffview open"})
-map("n", "<leader>gn", "<cmd>Neogit<cr>", {desc="neogit open"})
+map("n", "gee", "<cmd>lua require('gaomengnan.discipline').insert_go_err()<cr>", { desc = "Go Error" })
+map("n", "<leader>dT", "<cmd>lua require('gaomengnan.debug').debug()<cr>", { desc = "Debug" })
+-- map("n", "<leader>cc", "<cmd>:Lspsaga code_action<cr>", { desc = "Lspsaga code_action" })
+map("n", "<leader>gS", "<cmd>DiffviewOpen<cr>", { desc = "diffview open" })
+map("n", "<leader>gn", "<cmd>Neogit<cr>", { desc = "neogit open" })
 
+map("n", "<leader>be", "<cmd>lua require('memento').toggle()<cr>", { desc = "buffer explorer open" })
 
-map("n", "<leader>e", "<cmd>CHADopen<cr>", {desc="chad file explorer open"})
-map("n", "<leader>be", "<cmd>lua require('memento').toggle()<cr>", {desc="buffer explorer open"})
+map(
+  "n",
+  "<leader>pp",
+  "<cmd>lua require'telescope'.extensions.projects.projects{}<cr>",
+  { desc = "Open project picker" }
+)
 
-map("n", "<leader>pp", "<cmd>lua require'telescope'.extensions.projects.projects{}<cr>", {desc="Open project picker"})
+map(
+  "n",
+  "<leader>wh",
+  "<cmd>lua require('gaomengnan.discipline').attach_go_debugger({})<cr>",
+  { desc = "Debug remote" }
+)
+
+vim.keymap.set("n", "<leader>rc", ":RunCode<CR>", { noremap = true, silent = false })
+vim.keymap.set("n", "<leader>rf", ":RunFile<CR>", { noremap = true, silent = false })
+
+map("n", "<leader>dA", "<cmd>lua require('gaomengnan.discipline').attach_pid()<cr>", { desc = "Debug Tracker" })
+-- vim.keymap.set('n', '<F5>', "<CMD>lua require 'dap'.continue<cr>", { noremap = true, silent = false })
+-- vim.keymap.set('n', '<F11>', "<CMD>lua require 'dap'.step_into<cr>", { noremap = true, silent = false })
+-- vim.keymap.set('n', '<F11>', "<CMD>lua require 'dap'.step_out<cr>", { noremap = true, silent = false })
+
+--  删除keymap
+-- vim.keymap.del("n", "<C-Down>")
+
+-- vim.keymap.set("n", "<leader>kk", function()
+--   local ts_utils = require("nvim-treesitter.ts_utils")
+--   local node = ts_utils.get_node_at_cursor()
+--   if node then
+--     local node_type = node:type()
+--     if node_type == "type_identifier" then
+--       local method = vim.fn.input("Method:")
+--       print(method)
+--     end
+--   end
+-- end)

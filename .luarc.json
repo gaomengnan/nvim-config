@@ -1,3 +1,11 @@
 {
-    "completion.autoRequire": false
+    "completion.autoRequire": false,
+    "diagnostics.globals": [
+        "M",
+        "goAttachAdapter"
+    ],
+    "diagnostics.disable": [
+        "unused-local",
+        "deprecated"
+    ]
 }
