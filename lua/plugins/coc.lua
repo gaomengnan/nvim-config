@@ -6,7 +6,7 @@ return {
   config = function()
     vim.g.coc_node_path = os.getenv("COC_NODE")
     vim.g.coc_npm_cmd = os.getenv("COC_NPM")
-    vim.g.coc_global_extensions = { "coc-vetur", "coc-json", "coc-tsserver"}
+    vim.g.coc_global_extensions = {}
     local keyset = vim.keymap.set
     local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
     -- keyset("x", "if", "<Plug>(coc-funcobj-i)", opts)
@@ -82,7 +82,7 @@ return {
     keyset("n", "<leader>cr", "<Plug>(coc-rename)", { silent = true })
     -- Formatting selected code
     -- keyset("x", "<leader>cf", "<Plug>(coc-format-selected)", {silent = true})
-    keyset("n", "<leader>cf", "<cmd>call CocAction('format')<CR>", { silent = true, desc = "COC Format" })
+    keyset("n", "<leader>cf", "<cmd>CocAction('format')<CR>", { silent = true, desc = "COC Format" })
     -- Add `:Format` command to format current buffer
     vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
     -- keyset("x", "<leader>ca", "<Plug>(coc-codeaction-selected)", {silent = true})

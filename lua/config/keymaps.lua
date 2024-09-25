@@ -6,7 +6,7 @@ local Util = require("lazyvim.util")
 
 -- DO NOT USE THIS IN YOU OWN CONFIG!!
 -- use `vim.keymap.set` instead
-local map = Util.safe_keymap_set
+local map = vim.keymap.set
 map("n", "<leader>ww", "<cmd>w<cr>", { desc = "save windows" })
 map("n", "<leader>;", "<cmd>Veil<cr>", { desc = "dashboard" })
 map("n", "0", "^", { desc = "line header" })
@@ -39,6 +39,7 @@ map("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 map("n", "md", "<cmd>Lspsaga peek_definition<CR>", { desc = "Lspsaga peek_definition" })
 map("n", "ma", "<cmd>:Lspsaga code_action<cr>", { desc = "Lspsaga code_action" })
 map("n", "mf", "<cmd>Lspsaga finder tyd+ref+imp+def<CR>", { desc = "Lspsaga finder" })
+map("n", "mr", "<cmd>Lspsaga rename<CR>", { desc = "Lspsaga rename" })
 
 map("n", ";n", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Lspsaga finder" })
 
@@ -147,3 +148,6 @@ map("n", "<leader>dA", "<cmd>lua require('gaomengnan.discipline').attach_pid()<c
 --     end
 --   end
 -- end)
+
+vim.keymap.del("n", ";")
+

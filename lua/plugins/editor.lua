@@ -32,6 +32,7 @@ return {
     "telescope.nvim",
     dependencies = {
       "nvim-telescope/telescope-file-browser.nvim",
+      "nvim-telescope/telescope-dap.nvim",
       "xiyaowong/telescope-emoji.nvim",
     },
     keys = {
@@ -136,6 +137,7 @@ return {
       local actions = require("telescope.actions")
       local fb_actions = require("telescope").extensions.file_browser.actions
       telescope.load_extension("emoji")
+      telescope.load_extension("dap")
 
       opts.defaults = vim.tbl_deep_extend("force", opts.defaults, {
         wrap_results = true,

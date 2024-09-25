@@ -152,6 +152,25 @@ return {
           { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
         )
       end
+
+      local dap = require("dap")
+      dap.adapters.php = {
+        type = "executable",
+        command = "node",
+        args = {
+          require("mason-registry").get_package("php-debug-adapter"):get_install_path() .. "/extension/out/phpDebug.js",
+          -- "/Users/wanglele/.local/share/nvim/mason/packages/php-debug-adapter/extension/out/phpDebug.js",
+        },
+      }
+
+      dap.configurations.php = {
+        {
+          type = "php",
+          request = "launch",
+          name = "Listen for Xdebug",
+          port = 9000,
+        },
+      }
     end,
   },
   {
@@ -230,6 +249,9 @@ return {
         "gomodifytags",
         "impl",
         "delve",
+        "php-debug-adapter",
+        "phpstan",
+        "pint",
       })
     end,
   },
@@ -263,7 +285,7 @@ return {
     opts = {
       servers = {
         html = {
-          filetypes = { "html", "templ", "heex"},
+          filetypes = { "html", "templ", "heex" },
         },
         elixirls = {
           single_file_support = true,
@@ -332,23 +354,23 @@ return {
 
         pyright = {},
 
-        ruff_lsp = {
-          keys = {
-            {
-              "<leader>co",
-              function()
-                vim.lsp.buf.code_action({
-                  apply = true,
-                  context = {
-                    only = { "source.organizeImports" },
-                    diagnostics = {},
-                  },
-                })
-              end,
-              desc = "Organize Imports",
-            },
-          },
-        },
+        -- ruff_lsp = {
+        --   keys = {
+        --     {
+        --       "<leader>co",
+        --       function()
+        --         vim.lsp.buf.code_action({
+        --           apply = true,
+        --           context = {
+        --             only = { "source.organizeImports" },
+        --             diagnostics = {},
+        --           },
+        --         })
+        --       end,
+        --       desc = "Organize Imports",
+        --     },
+        --   },
+        -- },
         rust_analyzer = {
           keys = {
             { "K", "<cmd>RustHoverActions<cr>", desc = "Hover Actions (Rust)" },
@@ -379,14 +401,17 @@ return {
             },
           },
         },
+        -- phpactor = {},
+        intelephense = {},
         gopls = {
           keys = {
             -- Workaround for the lack of a DAP strategy in neotest-go: https://github.com/nvim-neotest/neotest-go/issues/12
             { "<leader>td", "<cmd>lua require('dap-go').debug_test()<CR>", desc = "Debug Nearest (Go)" },
           },
           -- cmd = {
-          --   "/Users/wanglele/go/1.20.0/bin/gopls",
+          --   "/Users/wanglele/.local/share/nvim/mason/bin/gopls",
           --   "-remote=auto",
+          --   "-mode=stdio",
           --   -- "-listen=unix;/var/folders/1r/r0yhk_2d01q1qsvc7h0lchf40000gn/T/gopls-915cd1-daemon.wanglele1",
           -- },
           settings = {
