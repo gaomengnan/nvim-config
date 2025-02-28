@@ -164,13 +164,43 @@ return {
       }
 
       dap.configurations.php = {
+        -- to run php right from the editor
         {
+          name = "run current script",
           type = "php",
           request = "launch",
-          name = "Listen for Xdebug",
-          port = 9000,
+          port = 9003,
+          cwd = "${fileDirname}",
+          program = "${file}",
+          runtimeExecutable = "php",
         },
+        -- to listen to any php call
+        {
+          name = "listen for Xdebug local",
+          type = "php",
+          request = "launch",
+          port = 9003,
+        },
+        -- to listen to php call in docker container
+        -- {
+        --   name = "listen for Xdebug docker",
+        --   type = "php",
+        --   request = "launch",
+        --   port = 9000,
+        --   -- this is where your file is in the container
+        --   pathMappings = {
+        --     ["/opt/project"] = "${workspaceFolder}",
+        --   },
+        -- },
       }
+      -- dap.configurations.php = {
+      --   {
+      --     type = "php",
+      --     request = "launch",
+      --     name = "Listen for Xdebug",
+      --     port = 9000,
+      --   },
+      -- }
     end,
   },
   {
@@ -203,8 +233,6 @@ return {
   },
   {
     "theHamsta/nvim-dap-virtual-text",
-    enabled = false,
-    opts = {},
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
@@ -281,7 +309,6 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-
     opts = {
       servers = {
         html = {
@@ -403,6 +430,7 @@ return {
         },
         -- phpactor = {},
         intelephense = {},
+        zls = {},
         gopls = {
           keys = {
             -- Workaround for the lack of a DAP strategy in neotest-go: https://github.com/nvim-neotest/neotest-go/issues/12

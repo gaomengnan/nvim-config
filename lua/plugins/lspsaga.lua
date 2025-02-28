@@ -3,6 +3,12 @@ return {
     "nvimdev/lspsaga.nvim",
     config = function()
       require("lspsaga").setup({
+        lightbulb = {
+          enable = false,
+        },
+        beacon = {
+          enable = false,
+        },
         definition = {
           keys = {
             edit = "<C-c>e",

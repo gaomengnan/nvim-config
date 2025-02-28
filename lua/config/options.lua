@@ -3,10 +3,12 @@
 -- Add any additional options here
 vim.cmd("set nocursorline")
 vim.cmd("set termguicolors")
-vim.cmd("set nonu")
+-- vim.cmd("set nonu")
 vim.cmd("set syntax=off")
 vim.cmd("set filetype=off")
 vim.cmd("set background=dark")
+vim.cmd("set number!")
+vim.cmd("set relativenumber!")
 vim.g.autoformat = false
 vim.g.go_fmt_autosave = 0
 vim.g.lsc_auto_map = true

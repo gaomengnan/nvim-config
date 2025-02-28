@@ -41,18 +41,18 @@ return {
     "fatih/vim-go",
     enabled = false,
     config = function()
-      vim.g.go_gopls_enabled = 0
-      vim.g.go_debug_substitute_paths = { {
-        "/go/src/app",
-        "/opt/wwwroot/go/Tracker_new",
-      } }
-      vim.g.go_gopls_options = {
-        "/Users/wanglele/go/1.20.0/bin/gopls",
-        "-remote=auto",
-      }
+      -- vim.g.go_gopls_enabled = 0
+      -- vim.g.go_debug_substitute_paths = { {
+      --   "/go/src/app",
+      --   "/opt/wwwroot/go/Tracker_new",
+      -- } }
+      -- vim.g.go_gopls_options = {
+      --   "/Users/wanglele/go/1.20.0/bin/gopls",
+      --   "-remote=auto",
+      -- }
       vim.g.go_fmt_autosave = 0
       vim.g.go_imports_autosave = 0
-      vim.g.go_code_completion_enabled = 0
+      -- vim.g.go_code_completion_enabled = 0
     end,
   },
 }

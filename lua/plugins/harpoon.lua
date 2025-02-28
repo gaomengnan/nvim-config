@@ -24,22 +24,22 @@ return {
   --     end, { desc = "Toggle prev buffer" })
   --   end,
   -- },
-  {
-    "otavioschwanck/arrow.nvim",
-    -- opts = {
-    --   show_icons = true,
-    --   leader_key = "\\", -- Recommended to be a single key
-    -- },
-    config = function()
-      vim.keymap.set("n", "<leader>ap", require("arrow.persist").previous)
-      vim.keymap.set("n", "<leader>an", require("arrow.persist").next)
-      -- vim.keymap.set("n", "<leader>am", require("arrow.persist").toggle)
-      require("arrow").setup({
-        buffer_leader_key = "M",
-        show_icons = true,
-        always_show_path = true,
-        leader_key = "\\", -- Recommended to be a single key
-      })
-    end,
-  },
+  -- {
+  --   "otavioschwanck/arrow.nvim",
+  --   -- opts = {
+  --   --   show_icons = true,
+  --   --   leader_key = "\\", -- Recommended to be a single key
+  --   -- },
+  --   config = function()
+  --     vim.keymap.set("n", "<leader>ap", require("arrow.persist").previous)
+  --     vim.keymap.set("n", "<leader>an", require("arrow.persist").next)
+  --     -- vim.keymap.set("n", "<leader>am", require("arrow.persist").toggle)
+  --     require("arrow").setup({
+  --       buffer_leader_key = "M",
+  --       show_icons = true,
+  --       always_show_path = true,
+  --       leader_key = "\\", -- Recommended to be a single key
+  --     })
+  --   end,
+  -- },
 }

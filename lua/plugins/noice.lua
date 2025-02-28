@@ -3,6 +3,10 @@ return -- lazy.nvim
   "folke/noice.nvim",
   event = "VeryLazy",
   opts = {
+    -- popupmenu = { enabled = false },
+    -- cmdline = {
+    --   enabled = false,
+    -- },
     messages = {
       -- NOTE: If you enable messages, then the cmdline is enabled automatically.
       -- This is a current Neovim limitation.

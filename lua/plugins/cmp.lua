@@ -1,11 +1,15 @@
 local Util = require("lazyvim.util")
 return {
+  { "saghen/blink.cmp", enabled = false },
   {
     "hrsh7th/nvim-cmp",
+    -- enabled = false,
     version = false, -- last release is way too old
     event = "InsertEnter",
     dependencies = {
       { "hrsh7th/cmp-emoji" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-buffer" },
       -- { "saadparwaiz1/cmp_luasnip" },
       -- {"onsails/lspkind.nvim"},
     },
@@ -37,11 +41,11 @@ return {
       --   { name = "ht_entity" },
       -- }))
 
-      -- cmp.setup({
-      --   window = {
-      --     completion = cmp.config.window.bordered(),
-      --   },
-      -- })
+      cmp.setup({
+        window = {
+          completion = cmp.config.window.bordered(),
+        },
+      })
       -- opts.window.completion = Util.inject.args(opts.window.completion, cmp.config.window.bordered)
       opts.window = {
         completion = cmp.config.window.bordered({

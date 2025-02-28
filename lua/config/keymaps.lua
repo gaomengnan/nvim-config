@@ -151,3 +151,8 @@ map("n", "<leader>dA", "<cmd>lua require('gaomengnan.discipline').attach_pid()<c
 
 vim.keymap.del("n", ";")
 
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+
+map("n", "<leader>cn", "<cmd>Compile<cr>", { noremap = true, silent = true })
+map("i", "jk", "<ESC>", { noremap = true, silent = true })
+-- map("n", "<leader>pC", "<cmd>CompilerRedo<cr>", { noremap = true, silent = true })

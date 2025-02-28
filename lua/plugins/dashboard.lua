@@ -54,7 +54,7 @@ return {
       })
     end,
   },
-  -- { "mhinz/vim-startify" },
+  { "mhinz/vim-startify" },
   {
     "nvimdev/dashboard-nvim",
     enabled = false,

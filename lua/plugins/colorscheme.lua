@@ -1,4 +1,5 @@
 return {
+  { "arzg/vim-colors-xcode" },
   {
     "olivercederborg/poimandres.nvim",
     lazy = false,
@@ -70,7 +71,7 @@ return {
     name = "catppuccin",
     opts = {
       term_colors = true,
-      -- transparent_background = true,
+      transparent_background = true,
       styles = {
         comments = {},
         conditionals = {},
@@ -103,4 +104,12 @@ return {
       },
     },
   },
+
+  {
+    "olimorris/onedarkpro.nvim",
+    priority = 1000, -- Ensure it loads first
+  },
+  {
+    "overvale/vacme"
+  }
 }
